@@ -11,10 +11,11 @@ A single-page portfolio website for **Aastha Adhushita**, a fashion designer, st
 | **Hero** | Name, role, her tagline *"I design… and then redesign"*, and a floating collage of her work |
 | **Intro and stats** | Short bio plus headline numbers from her résumé (100+ trends researched, 100+ moodboards and reports, 10,000+ dataset entries, 4 projects) |
 | **Selected work** | Four case studies as stacking full-screen cards. Each opens a full-screen viewer with her original boards |
+| **Styling portfolio** | Five concept-led styled looks (Poo-core Glam, Grunge Pop Star, Dark Enchantress, Feral Glam, Urban Desi Fusion), each opening a board viewer with credits |
 | **Trend Lab** | Her S/S 2027 forecast: the four trend areas, the Dominant / Growing / Emerging / Niche scale, and a draggable strip of report pages |
 | **Experience** | Roles at STYLZ, NO CAP Creative and Bisceglie.in |
 | **About** | Skills, tools, education, certifications and languages |
-| **Contact** | Email link and a résumé download |
+| **Contact** | Email link, résumé download, Behance and LinkedIn |
 
 ### Selected work
 
@@ -74,6 +75,7 @@ The site is fully static. To publish it with GitHub Pages, go to **Settings → 
 ├── Aastha_Resume.pdf   # résumé linked from the Contact section
 ├── img/
 │   ├── d01–d37.webp    # portfolio pages (Blue Alchemy, Iridescent Arbor, Path of Revati, Merry Maya)
+│   ├── s*.webp         # styling portfolio pages
 │   └── t*.webp         # selected S/S 2027 trend-report pages
 └── docs/               # screenshots used in this README
 ```

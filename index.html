@@ -115,6 +115,28 @@ h2.big em{color:var(--rose)}
 .c4{--c:#f3d9c9;background:var(--c);color:#5a2a18}
 .c2 .num{color:#7f9a62}.c4 .num{color:#d98a62}
 @media(max-width:860px){.card{grid-template-columns:1fr;min-height:0}.card .img{order:-1;aspect-ratio:16/10;min-height:0}.proj{position:relative;min-height:0;padding:20px 0}}
+
+/* styling */
+.sty{background:#f3cde0;border-radius:36px;margin:0 clamp(8px,1.5vw,20px)}
+.sty .eyebrow{color:#7a4a60}
+.sty h2.big em{color:#b3124d}
+.sty-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.sty-head p{max-width:380px;color:#6b4658}
+.srail{display:flex;gap:20px;overflow-x:auto;padding:60px var(--pad) 20px;scroll-snap-type:x mandatory;scrollbar-width:thin;cursor:grab}
+.look{flex:0 0 min(86vw,560px);scroll-snap-align:center;background:#fff8fb;border-radius:22px;overflow:hidden;box-shadow:0 24px 50px -28px rgba(90,20,50,.5);transition:transform .4s;cursor:pointer;display:flex;flex-direction:column}
+.look:hover{transform:translateY(-8px) rotate(-.6deg)}
+.look .im{aspect-ratio:16/10;overflow:hidden;background:#222}
+.look .im img{width:100%;height:100%;object-fit:cover;transition:transform 1s}
+.look:hover .im img{transform:scale(1.05)}
+.look .bd{padding:24px 26px 28px;display:flex;flex-direction:column;gap:10px;flex:1}
+.look .n{font:500 12px var(--mono);letter-spacing:.1em;color:#b3124d}
+.look h3{font-family:var(--serif);font-weight:400;font-size:clamp(32px,3.4vw,46px);line-height:1;letter-spacing:-.02em}
+.look h3 small{display:block;font:italic 400 .52em var(--serif);color:#7a4a60;margin-top:6px}
+.look p{font-size:15px;color:#5b4150}
+.look p b{font-weight:600;color:var(--ink)}
+.look .cr{margin-top:auto;padding-top:14px;border-top:1px solid rgba(90,20,50,.18);font:400 11px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:#7a4a60}
+.look .go{font:500 12px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#b3124d}
+.sty-foot{padding:10px var(--pad) 70px;color:#7a4a60}
 /* trend lab */
 .lab{background:var(--ink);color:var(--bg);border-radius:36px 36px 0 0}
 .lab .eyebrow{color:#a79f90}
@@ -203,7 +225,7 @@ footer{display:flex;justify-content:space-between;padding:60px var(--pad) 30px;c
 <div id="cur">View</div>
 
 <nav>
-  <a href="#top" class="hide">Home</a><a href="#work">Work</a><a href="#lab">Trend Lab</a><a href="#experience" class="hide">Experience</a><a href="#about">About</a><a href="#contact">Contact</a>
+  <a href="#top" class="hide">Home</a><a href="#work">Work</a><a href="#styling">Styling</a><a href="#lab">Trend Lab</a><a href="#experience" class="hide">Experience</a><a href="#about">About</a><a href="#contact">Contact</a>
 </nav>
 
 <header class="hero" id="top">
@@ -219,8 +241,8 @@ footer{display:flex;justify-content:space-between;padding:60px var(--pad) 30px;c
 </header>
 
 <div class="marq" aria-hidden="true"><div>
-  <span>Trend Forecasting</span><span>Upcycled Denim</span><span>Styling</span><span>CLO 3D</span><span>Couture</span><span>Moodboards</span><span>Kidswear</span><span>Colour Stories</span>
-  <span>Trend Forecasting</span><span>Upcycled Denim</span><span>Styling</span><span>CLO 3D</span><span>Couture</span><span>Moodboards</span><span>Kidswear</span><span>Colour Stories</span>
+  <span>Trend Forecasting</span><span>Editorial Styling</span><span>Upcycled Denim</span><span>Styling</span><span>CLO 3D</span><span>Couture</span><span>Moodboards</span><span>Kidswear</span><span>Colour Stories</span>
+  <span>Trend Forecasting</span><span>Editorial Styling</span><span>Upcycled Denim</span><span>Styling</span><span>CLO 3D</span><span>Couture</span><span>Moodboards</span><span>Kidswear</span><span>Colour Stories</span>
 </div></div>
 
 <section>
@@ -236,7 +258,7 @@ footer{display:flex;justify-content:space-between;padding:60px var(--pad) 30px;c
       <div class="stat"><b data-n="100" data-x="+">0</b><span>trends researched</span></div>
       <div class="stat"><b data-n="100" data-x="+">0</b><span>moodboards &amp; reports</span></div>
       <div class="stat"><b data-n="10000" data-x="+">0</b><span>dataset entries organised</span></div>
-      <div class="stat"><b data-n="4">0</b><span>collections &amp; concept projects</span></div>
+      <div class="stat"><b data-n="9">0</b><span>collections, projects &amp; styled looks</span></div>
     </div>
   </div>
 </section>
@@ -280,6 +302,33 @@ footer{display:flex;justify-content:space-between;padding:60px var(--pad) 30px;c
       <div class="img"><img src="img/d27.webp" alt="Merry Maya inspiration board" loading="lazy"></div>
     </div></article>
   </div>
+</section>
+
+<section class="sty" id="styling" style="margin-top:0">
+  <div class="wrap">
+    <div class="sty-head">
+      <div><div class="eyebrow mono">Styling portfolio</div><h2 class="big reveal">No fixed aesthetic.<br>Just a <em>point of view.</em></h2></div>
+      <p>Five concept-led looks, each built from a research board, a styled outfit and the final shoot. Styling concept, direction and creative by Aastha.</p>
+    </div>
+  </div>
+  <div class="srail" id="srail">
+      <article class="look" data-p="poo"><div class="im"><img src="img/s05.webp" alt="The Fashion Poo-lice styling board" loading="lazy"></div>
+        <div class="bd"><span class="n">LOOK 1 / 05</span><h3>The Fashion Poo-lice<small>The It-Girl Index</small></h3>
+        <p><b>Poo-core Glam.</b> A celebration of Y2K fashion, unapologetic confidence and iconic Bollywood girlhood: fitted silhouettes, mini skirts, cropped tops, tinted sunglasses and chunky accessories.</p><span class="go">View 3 boards →</span><div class="cr">Model: Aastha · HMU: Saarah Umrethwala</div></div></article>
+      <article class="look" data-p="moshpit"><div class="im"><img src="img/s08.webp" alt="Moshpit Muse styling board" loading="lazy"></div>
+        <div class="bd"><span class="n">LOOK 2 / 05</span><h3>Moshpit Muse<small>Bad Girl Dress Code</small></h3>
+        <p><b>Grunge Pop Star.</b> An edgy fusion of streetwear and oversized proportions inspired by Billie Eilish: a graphic jersey, baggy black shorts, a printed bandana and a canvas tote.</p><span class="go">View 3 boards →</span><div class="cr">Model &amp; HMU: Aastha</div></div></article>
+      <article class="look" data-p="dark"><div class="im"><img src="img/s11.webp" alt="Daughter of the Dark styling board" loading="lazy"></div>
+        <div class="bd"><span class="n">LOOK 3 / 05</span><h3>Daughter of the Dark<small>Her Dark Materials</small></h3>
+        <p><b>Dark Enchantress.</b> A gothic take on witchcore: a flowing black maxi with sheer sleeves and a structured corset, layered chokers, occult-inspired jewellery and a candle as the ritual prop.</p><span class="go">View 3 boards →</span><div class="cr">Model: Aastha · HMU: Saarah Umrethwala</div></div></article>
+      <article class="look" data-p="feral"><div class="im"><img src="img/s14.webp" alt="Pretty Feral styling board" loading="lazy"></div>
+        <div class="bd"><span class="n">LOOK 4 / 05</span><h3>Pretty Feral<small>Her Wild Side</small></h3>
+        <p><b>Feral Glam.</b> Y2K partywear meets animal print: a leopard halter crop, distressed denim mini with faux-fur trim, a printed headscarf and furry leg warmers for a maximalist finish.</p><span class="go">View 3 boards →</span><div class="cr">Model: Babli Singh · HMU: Aastha</div></div></article>
+      <article class="look" data-p="aurat"><div class="im"><img src="img/s17.webp" alt="The Insane Aurat styling board" loading="lazy"></div>
+        <div class="bd"><span class="n">LOOK 5 / 05</span><h3>The Insane Aurat<small>Saree, Not Sorry</small></h3>
+        <p><b>Urban Desi Fusion.</b> Traditional draping with streetwear edge: a vibrant lime-yellow saree worn with a structured denim corset, oxidised silver and a printed headscarf.</p><span class="go">View 3 boards →</span><div class="cr">Model: Sumadhi Rawat · HMU: Aastha</div></div></article>
+  </div>
+  <div class="sty-foot mono">← Drag or scroll the looks · Click a look to open the boards →</div>
 </section>
 
 <section class="lab" id="lab">
@@ -367,7 +416,7 @@ footer{display:flex;justify-content:space-between;padding:60px var(--pad) 30px;c
     <div class="eyebrow mono" style="justify-content:center">Contact</div>
     <h2 class="big reveal">Let's make<br><em>something.</em></h2>
     <a class="mail" href="mailto:aasthaadhushita@gmail.com">aasthaadhushita@gmail.com</a>
-    <div class="btns"><a class="btn fill" href="Aastha_Resume.pdf" download>Download résumé</a></div>
+    <div class="btns"><a class="btn fill" href="Aastha_Resume.pdf" download>Download résumé</a><a class="btn" href="https://www.behance.net/aasthaadhushita" target="_blank" rel="noopener">Behance ↗</a><a class="btn" href="https://www.linkedin.com/in/aasthaadhushita/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
   </div>
   <footer class="mono"><span>© 2026 Aastha Adhushita</span><span>Hyderabad, India</span><a href="#top">Back to top ↑</a></footer>
 </section>
@@ -379,11 +428,17 @@ footer{display:flex;justify-content:space-between;padding:60px var(--pad) 30px;c
 </div>
 
 <script>
+const R=(p,a,b)=>Array.from({length:b-a+1},(_,i)=>p+String(a+i).padStart(2,'0'));
 const P={
-  blue:{t:'Blue Alchemy',r:[4,11]},
-  arbor:{t:'Iridescent Arbor',r:[12,18]},
-  revati:{t:'Path of Revati',r:[19,25]},
-  maya:{t:'Merry Maya · Name It',r:[26,37]}
+  blue:{t:'Blue Alchemy',f:R('d',4,11)},
+  arbor:{t:'Iridescent Arbor',f:R('d',12,18)},
+  revati:{t:'Path of Revati',f:R('d',19,25)},
+  maya:{t:'Merry Maya · Name It',f:R('d',26,37)},
+  poo:{t:'The Fashion Poo-lice',f:R('s',5,7)},
+  moshpit:{t:'Moshpit Muse',f:R('s',8,10)},
+  dark:{t:'Daughter of the Dark',f:R('s',11,13)},
+  feral:{t:'Pretty Feral',f:R('s',14,16)},
+  aurat:{t:'The Insane Aurat',f:R('s',17,19)}
 };
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const pad=n=>String(n).padStart(2,'0');
@@ -391,7 +446,7 @@ const pad=n=>String(n).padStart(2,'0');
 const bar=$('#bar');
 addEventListener('scroll',()=>{bar.style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
   $$('.float').forEach(f=>f.style.transform=`translateY(${scrollY*f.dataset.s*-1}px) rotate(${getComputedStyle(f).getPropertyValue('--r')})`);
-  const ids=['work','lab','experience','about','contact'];let cur='';
+  const ids=['work','styling','lab','experience','about','contact'];let cur='';
   ids.forEach(i=>{const e=document.getElementById(i);if(e.getBoundingClientRect().top<innerHeight*.4)cur=i});
   $$('nav a').forEach(a=>a.classList.toggle('act',a.getAttribute('href')==='#'+cur));
 },{passive:true});
@@ -405,21 +460,22 @@ $$('.reveal,.tier').forEach(e=>io.observe(e));
 const cur=$('#cur');
 addEventListener('mousemove',e=>{cur.style.transform=cur.classList.contains('on')?`translate(${e.clientX}px,${e.clientY}px) scale(1)`:`translate(${e.clientX}px,${e.clientY}px) scale(0)`;});
 $$('.card').forEach(c=>{c.addEventListener('mouseenter',()=>cur.classList.add('on'));c.addEventListener('mouseleave',()=>{cur.classList.remove('on')});});
-// drag rail
-const rail=$('#rail');let down=false,sx=0,sl=0;
-rail.addEventListener('mousedown',e=>{down=true;sx=e.pageX;sl=rail.scrollLeft;rail.style.scrollSnapType='none'});
-addEventListener('mouseup',()=>{down=false;rail.style.scrollSnapType=''});
-rail.addEventListener('mousemove',e=>{if(down){e.preventDefault();rail.scrollLeft=sl-(e.pageX-sx)}});
+// drag rails
+$$('#rail,#srail').forEach(rail=>{let down=false,sx=0,sl=0,moved=false;
+  rail.addEventListener('mousedown',e=>{down=true;moved=false;sx=e.pageX;sl=rail.scrollLeft;rail.style.scrollSnapType='none'});
+  addEventListener('mouseup',()=>{down=false;rail.style.scrollSnapType=''});
+  rail.addEventListener('mousemove',e=>{if(down){moved=Math.abs(e.pageX-sx)>5||moved;e.preventDefault();rail.scrollLeft=sl-(e.pageX-sx)}});
+  rail.addEventListener('click',e=>{if(moved){e.stopPropagation();e.preventDefault();moved=false}},true)});
 // lightbox
 let cp=null,idx=0,pages=[];
 const lb=$('#lb'),lbi=$('#lbi');
-function show(i){idx=(i+pages.length)%pages.length;lbi.src=`img/d${pad(pages[idx])}.webp`;$('#lbc').textContent=`${idx+1} / ${pages.length}`;
+function show(i){idx=(i+pages.length)%pages.length;lbi.src=`img/${pages[idx]}.webp`;$('#lbc').textContent=`${idx+1} / ${pages.length}`;
   $$('#strip img').forEach((im,k)=>im.classList.toggle('on',k===idx));$$('#strip img')[idx]?.scrollIntoView({inline:'center',block:'nearest'})}
-function open(k){cp=P[k];pages=[];for(let n=cp.r[0];n<=cp.r[1];n++)pages.push(n);
-  $('#lbt').textContent=cp.t;$('#strip').innerHTML=pages.map((n,i)=>`<img src="img/d${pad(n)}.webp" data-i="${i}" alt="">`).join('');
+function open(k){cp=P[k];pages=cp.f;
+  $('#lbt').textContent=cp.t;$('#strip').innerHTML=pages.map((n,i)=>`<img src="img/${n}.webp" data-i="${i}" alt="">`).join('');
   lb.classList.add('on');document.body.style.overflow='hidden';show(0)}
 function close(){lb.classList.remove('on');document.body.style.overflow=''}
-$$('.card').forEach(c=>c.addEventListener('click',()=>open(c.dataset.p)));
+$$('.card,.look').forEach(c=>c.addEventListener('click',()=>open(c.dataset.p)));
 $('#x').onclick=close;$('#prev').onclick=()=>show(idx-1);$('#next').onclick=()=>show(idx+1);
 $('#strip').addEventListener('click',e=>{if(e.target.dataset.i)show(+e.target.dataset.i)});
 addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')show(idx+1);if(e.key==='ArrowLeft')show(idx-1)});
