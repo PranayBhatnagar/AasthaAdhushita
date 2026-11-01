@@ -39,9 +39,9 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
 /* nav */
 nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:80;display:flex;gap:4px;padding:6px;border-radius:99px;
   background:rgba(239,234,224,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
-nav a{padding:8px 16px;border-radius:99px;font-size:14px;transition:.25s}
+nav a{padding:8px 16px;border-radius:99px;font-size:14px;transition:.25s;white-space:nowrap}
 nav a:hover,nav a.act{background:var(--ink);color:var(--bg)}
-@media(max-width:640px){nav a{padding:7px 10px;font-size:13px}nav a.hide{display:none}}
+@media(max-width:640px){nav{max-width:calc(100vw - 24px)}nav a{padding:7px 9px;font-size:13px}nav a.hide{display:none}}
 /* hero */
 .hero{min-height:100svh;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:120px var(--pad) 40px;overflow:hidden}
 .hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(64px,15.5vw,250px);line-height:.84;letter-spacing:-.035em;position:relative;z-index:3}
