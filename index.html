@@ -52,7 +52,6 @@ nav a{padding:8px 15px;border-radius:99px;font:400 11px var(--mono);letter-spaci
 nav a.aa{display:grid;place-items:center;width:34px;height:34px;padding:0;margin-right:4px;border-radius:50%;background:var(--bur);color:var(--pink);font:italic 500 15px/1 var(--serif);letter-spacing:.02em;text-transform:none}
 nav a.aa:hover{background:var(--espresso);color:var(--pink)}
 .navburger{display:none}
-#navpanel{display:none}
 .sndtog{display:grid;place-items:center;width:34px;height:34px;margin-left:4px;border-radius:50%;color:var(--bur-d);transition:.25s;flex:none}
 .sndtog svg{width:18px;height:18px}
 .sndtog .wv{display:none}.sndtog.on .wv{display:block}.sndtog.on .mx{display:none}
@@ -73,13 +72,10 @@ nav a:hover,nav a.act{background:var(--bur);color:var(--pink)}
   nav.min{width:auto;gap:2px;left:auto;right:12px;transform:none}
   nav.min a:not(.aa){display:none}
   nav.min .navburger{display:grid}
-  #navpanel{display:block;position:fixed;top:70px;right:12px;z-index:79;width:min(300px,calc(100vw - 24px));padding:10px;border-radius:20px;background:rgba(250,238,240,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-    border:1px solid rgba(70,19,18,.18);box-shadow:0 24px 40px -18px rgba(46,26,14,.6);opacity:0;pointer-events:none;transform:translate(0,-10px) scale(.96);transform-origin:100% 0;transition:.3s cubic-bezier(.3,1.3,.5,1)}
-  #navpanel.on{opacity:1;pointer-events:auto;transform:none}
-  #navpanel a{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-radius:12px;font:400 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--bur-d)}
-  #navpanel a::after{content:"→";color:var(--bur);opacity:.5}
-  #navpanel a.act,#navpanel a:active{background:var(--bur);color:var(--pink)}
-  #navpanel a.act::after{color:var(--pink);opacity:1}
+  nav.min.open{width:calc(100vw - 24px);max-width:420px;gap:0}
+  nav.min.open a:not(.aa){display:flex}
+  nav.min.open a.hide{display:none}
+  nav.min.open .navburger{display:none}
 }
 
 /* hero: leopard notebook cover */
@@ -944,7 +940,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin
 <div id="cur">view</div>
 
 <nav>
-  <a href="#top" class="aa" aria-label="Back to top">AA</a><a href="#styling">Styling</a><a href="#work">Collections</a><a href="#lab">Trend Lab</a><a href="#experience" class="hide">Experience</a><a href="#about" class="hide">About</a><a href="#contact">Contact</a><button class="navburger" id="navburger" aria-label="Open menu" aria-expanded="false" aria-controls="navpanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button><button class="sndtog" id="sndtog" aria-pressed="false" aria-label="Sound is off. Turn sound on" title="Sound off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><g class="wv" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></g><g class="mx" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></g></svg></button>
+  <a href="#top" class="aa" aria-label="Back to top">AA</a><a href="#styling">Styling</a><a href="#work">Collections</a><a href="#lab">Trend Lab</a><a href="#experience" class="hide">Experience</a><a href="#about" class="hide">About</a><a href="#contact">Contact</a><button class="navburger" id="navburger" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button><button class="sndtog" id="sndtog" aria-pressed="false" aria-label="Sound is off. Turn sound on" title="Sound off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><g class="wv" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></g><g class="mx" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></g></svg></button>
 </nav>
 
 <header class="hero" id="top">
@@ -1323,17 +1319,13 @@ const SFX=(()=>{let ctx=null,out=null,on=false;const last={};
 // hero sparkles chime when the cursor passes close by
 (()=>{const hero=$('.hero'),sp=$$('.hero .spk');hero.addEventListener('pointermove',e=>{if(!SFX.on)return;sp.forEach(s=>{const r=s.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
   if(dx*dx+dy*dy<45*45){if(!s._near){s._near=1;SFX.play('chime')}}else s._near=0})})})();
-// phones: after the hero the nav bar collapses into a hamburger with a dropdown of the same links
+// phones: after the hero the nav bar collapses into a hamburger; tapping it expands the bar again, and scrolling minimises it once more
 (()=>{const nav=document.querySelector('nav'),bt=$('#navburger'),hero=$('.hero'),mq=matchMedia('(max-width:700px)');if(!nav||!bt)return;
-  const panel=document.createElement('div');panel.id='navpanel';panel.setAttribute('role','menu');
-  nav.querySelectorAll('a').forEach(a=>{if(a.classList.contains('aa'))return;const c=a.cloneNode(true);c.classList.remove('hide');c.removeAttribute('class');c.dataset.t=a.getAttribute('href');panel.appendChild(c)});
-  document.body.appendChild(panel);
-  const close=()=>{panel.classList.remove('on');bt.setAttribute('aria-expanded','false')};
-  const upd=()=>{const past=mq.matches&&hero.getBoundingClientRect().bottom<70;nav.classList.toggle('min',past);if(!past)close();
-    panel.querySelectorAll('a').forEach(a=>a.classList.toggle('act',nav.querySelector(`a[href="${a.dataset.t}"].act`)!==null))};
-  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
-  bt.addEventListener('click',()=>{const o=!panel.classList.contains('on');panel.classList.toggle('on',o);bt.setAttribute('aria-expanded',o);bt.setAttribute('aria-label',o?'Close menu':'Open menu')});
-  panel.addEventListener('click',e=>{if(e.target.closest('a'))close()});addEventListener('pointerdown',e=>{if(!panel.contains(e.target)&&!bt.contains(e.target))close()});
+  const close=()=>{nav.classList.remove('open');bt.setAttribute('aria-expanded','false');bt.setAttribute('aria-label','Open menu')};
+  const upd=()=>{const past=mq.matches&&hero.getBoundingClientRect().bottom<70;nav.classList.toggle('min',past);if(!past)close()};
+  addEventListener('scroll',()=>{upd();close()},{passive:true});addEventListener('resize',upd);upd();
+  bt.addEventListener('click',()=>{const o=!nav.classList.contains('open');nav.classList.toggle('open',o);bt.setAttribute('aria-expanded',o);bt.setAttribute('aria-label',o?'Close menu':'Open menu')});
+  nav.addEventListener('click',e=>{if(e.target.closest('a'))setTimeout(close,0)});addEventListener('pointerdown',e=>{if(!nav.contains(e.target))close()});
   addEventListener('keydown',e=>{if(e.key==='Escape')close()})})();
 // progress, parallax, nav state
 const bar=$('#bar');
