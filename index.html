@@ -238,6 +238,7 @@ h2.big em{color:var(--bur)}
 .folder .back{position:absolute;inset:0;border-radius:4px 14px 14px 14px;box-shadow:0 46px 80px -34px rgba(46,26,14,.6)}
 .folder .tab{position:absolute;bottom:100%;left:0;height:40px;min-width:44%;padding:0 18px;border-radius:12px 14px 0 0;display:flex;align-items:center;gap:8px;white-space:nowrap}
 .papers{position:absolute;inset:0}
+@media (hover:none) and (pointer:coarse) and (min-width:744px) and (max-width:1366px){.papers{transform:translateZ(60px)}.cover .face{-webkit-backface-visibility:hidden}}
 .pp{position:absolute;left:5%;width:90%;bottom:5%;aspect-ratio:16/9;object-fit:cover;background:#fff;padding:6px;border-radius:2px;box-shadow:0 14px 30px -12px rgba(0,0,0,.5);will-change:transform}
 .cover{position:absolute;left:0;right:0;bottom:0;height:86%;transform-origin:50% 100%;transform-style:preserve-3d;will-change:transform}
 .cover .face,.cover .in{position:absolute;inset:0;border-radius:10px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:visible}
@@ -764,6 +765,8 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin
 .knockme::before{content:"";position:absolute;top:-9px;left:50%;width:46px;height:16px;margin-left:-23px;background:rgba(181,173,128,.85);transform:rotate(3deg)}
 @keyframes nudge{0%,70%,100%{rotate:0deg}75%{rotate:-4deg}80%{rotate:3deg}85%{rotate:-2deg}90%{rotate:1deg}}
 .wrobe.knock{animation:knock .62s ease-out}
+.wrobe.knocking{z-index:30}
+.wrobe.knocking .kbub{z-index:40}
 @keyframes knock{0%,100%{transform:none}8%{transform:translateX(-3px) rotate(-.5deg)}16%{transform:translateX(2px) rotate(.35deg)}24%{transform:none}
   48%{transform:translateX(-3px) rotate(-.5deg)}56%{transform:translateX(2px) rotate(.35deg)}64%{transform:none}}
 .kn{position:absolute;z-index:12;pointer-events:none;font:400 22px/1 var(--marker);color:var(--blush);text-shadow:0 2px 6px rgba(0,0,0,.7);white-space:nowrap;
@@ -1255,6 +1258,7 @@ const P={
   aurat:{t:'The Insane Aurat',f:R('s',17,19)},
   trend:{t:'S/S 27 Trend Report',f:R('r',1,82)}
 };
+const TABLET="(hover:none) and (pointer:coarse) and (min-width:744px) and (max-width:1366px)";
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 // ===== sound: everything is synthesised in the browser (no audio files). Off by default; the nav toggle remembers the choice. =====
 const SFX=(()=>{let ctx=null,out=null,on=false;const last={};
@@ -1372,7 +1376,7 @@ const still=matchMedia('(prefers-reduced-motion: reduce)').matches;if(still)fw.c
 function set(i,t){const e=el[i],enter=i===0||still?1:ez(cl((t+.22)/.22)),exit=i===N-1||still?0:ez(cl((t-.78)/.22));
   const open=ez(cl(t/.3)),pap=ez(cl((t-.12)/.34)),txt=ez(cl((t-.3)/.22));
   e.f.style.transform=`translate3d(0,${(1-enter)*85-exit*75}vh,0) rotate(${tilt[i]*(1-exit)+(1-enter)*6}deg) scale(${1-exit*.12})`;
-  if(open>.12&&!(e.op>.12))SFX.play('flap');e.op=open;e.cv.style.transform=`rotateX(${-open*116}deg)`;e.cv.style.opacity=innerWidth<860?1-cl((open-.4)/.4):1;
+  if(open>.12&&!(e.op>.12))SFX.play('flap');e.op=open;e.cv.style.transform=`rotateX(${-open*116}deg)`;e.cv.style.opacity=innerWidth<860||matchMedia(TABLET).matches?1-cl((open-.4)/.4):1;
   e.pp.forEach((p,k)=>p.style.transform=`translate3d(${dx[k]*pap}%,${off[k]*pap}%,0) rotate(${rot[k]*pap}deg)`);
   e.x.style.opacity=txt*(1-exit);e.x.style.transform=`translate3d(0,${(1-txt)*40-exit*50}px,0)`;e.big.style.opacity=txt*(1-exit)}
 function render(p){sc.forEach((s,i)=>{const t=p-i,vis=t>-.22&&t<1;s._t=t;s.classList.toggle('vis',vis);s.classList.toggle('act',t>-.05&&t<.85);if(vis)set(i,t);
@@ -1495,8 +1499,10 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&skm.classList.contains('on')
     sound();wr.classList.remove('knock');void wr.offsetWidth;wr.classList.add('knock');
     [0,250].forEach((d,k)=>setTimeout(()=>{const t=document.createElement('span');t.className='kn';t.textContent='knock';t.style.left=(x+(k?18:-14))+'px';t.style.top=(y+(k?-10:6))+'px';t.style.setProperty('--r',(k?8:-8)+'deg');
       const rp=document.createElement('span');rp.className='rip';rp.style.left=x+'px';rp.style.top=y+'px';wr.append(t,rp);setTimeout(()=>{t.remove();rp.remove()},950)},d));
+    const tab=matchMedia(TABLET).matches;if(tab)wr.classList.add('knocking');
     setTimeout(()=>bub.classList.add('on'),800);
-    setTimeout(()=>{go();setTimeout(()=>{bub.classList.remove('on');busy=false},2600)},1900)};
+    if(tab)setTimeout(()=>{bub.classList.remove('on');setTimeout(()=>wr.classList.remove('knocking'),400)},800+2500);
+    setTimeout(()=>{go();setTimeout(()=>{if(!tab)bub.classList.remove('on');busy=false},2600)},1900)};
   wr.addEventListener('click',e=>{if(!isClosed())return;const r=wr.getBoundingClientRect();knock(e.clientX-r.left,e.clientY-r.top)});
   wr.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&isClosed()){e.preventDefault();knock()}})})();
 // wardrobe hat boxes: click to pop the lid and fan out what's inside; pages and polaroids open their gallery
@@ -1507,7 +1513,9 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&skm.classList.contains('on')
   addEventListener('click',e=>{if(!e.target.closest('#contact .hbox'))bx.forEach(o=>{o.classList.remove('open');o.setAttribute('aria-expanded','false')})})})();
 // trend lab: filter chips, tap-to-flip cards, report pages in the lightbox
 (()=>{const g=$('#tgrid');if(!g)return;const cards=$$('#tgrid .tc');
-  const FIRST=3,STEP=6,mb=$('#tmore'),mw=mb.parentNode;let f='all',gl='all',shown=FIRST;
+  const tp=matchMedia(TABLET+' and (orientation:portrait)');let FIRST=3,STEP=6;const sizes=()=>{FIRST=tp.matches?4:3;STEP=tp.matches?4:6};sizes();
+  const mb=$('#tmore'),mw=mb.parentNode;let f='all',gl='all',shown=FIRST;
+  tp.addEventListener('change',()=>{const was=shown===FIRST;sizes();if(was){shown=FIRST;apply(false)}});
   const anim=c=>{c.classList.add('in');c.classList.remove('tcpop');void c.offsetWidth;c.classList.add('tcpop')};
   const pool=()=>cards.filter(c=>(f==='all'||c.dataset.cat===f)&&(gl==='all'||c.dataset.g===gl));
   const counts=()=>$$('.lab-c button').forEach(b=>{const n=cards.filter(c=>(gl==='all'||c.dataset.g===gl)&&(b.dataset.f==='all'||c.dataset.cat===b.dataset.f)).length;b.querySelector('b').textContent=n;b.disabled=!n;b.classList.toggle('empty',!n)});
