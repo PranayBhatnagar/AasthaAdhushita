@@ -155,7 +155,7 @@ h2.big em{color:var(--bur)}
 .torn .news{font-family:var(--serif);font-size:13px;line-height:1.25;color:rgba(30,40,18,.55);padding:14px;text-align:justify;height:100%;overflow:hidden}
 .polaroid{background:#fff;padding:12px 12px 48px;box-shadow:0 26px 50px -24px rgba(46,26,14,.55);position:relative}
 .polaroid img{width:100%;object-fit:cover;object-position:50% 12%}
-.polaroid .cap{position:absolute;left:0;right:0;bottom:10px;text-align:center;font:400 32px var(--script);color:var(--bur)}
+.polaroid .cap{position:absolute;left:0;right:0;bottom:0;height:var(--strip,48px);display:flex;align-items:center;justify-content:center;padding-top:4px;line-height:1;font:400 32px/1 var(--script);color:var(--bur)}
 .tape::before{content:"";position:absolute;top:-14px;left:50%;width:104px;height:28px;margin-left:-52px;background:rgba(240,196,204,.85);transform:rotate(-4deg);box-shadow:0 2px 4px rgba(0,0,0,.06)}
 .clip::after{content:"";position:absolute;top:-22px;right:30px;width:16px;height:56px;border:2.5px solid #9c9aa3;border-radius:10px;border-bottom-color:transparent}
 .doodle{position:absolute;color:var(--bur-d);pointer-events:none}
@@ -163,13 +163,16 @@ h2.big em{color:var(--bur)}
 /* note */
 .note-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:clamp(40px,7vw,110px);align-items:center}
 .note-art{position:relative;min-height:560px}
-.note-art .torn{position:absolute;inset:6% 8% 4% 2%;transform:rotate(-3deg)}
+.note-art .polaroid.tape::before{background:rgba(181,173,128,.9)}
+.note-art .torn{position:absolute;inset:6% 8% 4% 2%;transform:rotate(-3deg);background:var(--bur)}
+.note-art .torn .news{color:rgba(250,238,240,.32)}
 .note-art .polaroid{position:absolute;width:62%;left:16%;top:4%;transform:rotate(3deg)}
 .note-art .polaroid img{aspect-ratio:4/5}
-.note-art .p2{width:40%;left:auto;right:0;top:auto;bottom:0;transform:rotate(-6deg);padding-bottom:36px}
+.note-art .p2{width:40%;left:auto;right:0;top:auto;bottom:0;transform:rotate(-6deg);padding-bottom:36px;--strip:36px}
 .note-art .p2 img{aspect-ratio:1}
-.note-art .p2 .cap{font-size:26px;bottom:4px}
-.note-art .marker{position:absolute;left:0;bottom:12%;font:400 clamp(30px,3vw,44px) var(--marker);color:var(--bur);transform:rotate(-8deg)}
+.note-art .p2 .cap{font-size:26px}
+.note-art .marker{position:absolute;left:-2%;bottom:13%;z-index:4;padding:10px 18px 8px;background:var(--sage);color:var(--bur);font:400 clamp(24px,2.4vw,34px)/1 var(--marker);transform:rotate(-9deg);box-shadow:0 10px 18px -8px rgba(46,26,14,.55);clip-path:polygon(0 8%,8% 0,22% 5%,38% 0,55% 4%,72% 0,88% 5%,100% 1%,97% 50%,100% 96%,84% 100%,66% 95%,48% 100%,30% 95%,14% 100%,0 96%,3% 50%)}
+.note-art .marker::after{content:"";position:absolute;left:30%;top:-2px;width:46px;height:12px;background:rgba(240,196,204,.85);transform:rotate(4deg)}
 .note p.lead{font-family:var(--serif);font-weight:300;font-size:clamp(34px,4vw,60px);line-height:1.05;color:var(--bur-d);margin-bottom:28px}
 .note p.lead em{color:var(--bur)}
 .note p.body{font-family:var(--serif);font-size:clamp(20px,1.6vw,23px);line-height:1.45;color:var(--mute);max-width:540px;margin-bottom:16px}
@@ -717,6 +720,14 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin
 .wd-scroll{height:340vh}
 .wd-stage{position:sticky;top:0;height:100vh;height:100svh;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:clamp(70px,8vw,140px);padding:96px var(--pad) 56px;z-index:1}
 .wd-txt{position:relative;z-index:12;max-width:300px}
+.wd-side{position:relative;z-index:12;justify-self:start;max-width:250px;color:var(--pink2)}
+.wd-side .polaroid{width:min(220px,16vw);padding:10px 10px 42px;--strip:42px;transform:rotate(4deg);box-shadow:0 26px 40px -18px rgba(0,0,0,.8)}
+.wd-side .polaroid::before{background:rgba(181,173,128,.9)}
+.wd-side .polaroid img{aspect-ratio:4/5;object-position:50% 70%}
+.wd-side .polaroid .cap{font-size:26px}
+.wd-side p{margin-top:26px;font:italic 400 19px/1.4 var(--serif);color:rgba(250,238,240,.82)}
+.wd-side p b{font-weight:400;color:var(--blush)}
+.wd-side .k{display:block;margin-top:14px;color:var(--sage);font-size:10px}
 .wd-txt .eyebrow{color:var(--blush)}
 .wd-txt h2{font:300 clamp(28px,2.5vw,40px)/1.08 var(--serif);color:var(--pink2)}
 .wd-txt h2 em{color:var(--blush)}
@@ -844,6 +855,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin
 .mirror{position:absolute;inset:10% 14% 14%;border-radius:999px 999px 6px 6px;border:5px solid #b38a3a;background:linear-gradient(160deg,rgba(240,196,204,.35),rgba(250,238,240,.08) 45%,rgba(240,196,204,.22));box-shadow:inset 0 0 20px rgba(0,0,0,.35)}
 @media(max-width:900px){
   .wd-scroll{height:340vh}
+  .wd-side{display:none}
   .wd-stage{grid-template-columns:1fr;grid-template-rows:auto 1fr;justify-items:center;text-align:center;gap:6px;padding:72px 16px 30px}
   .wd-txt p{display:none}.wd-txt h2{font-size:30px}.wd-txt .eyebrow{justify-content:center}
   .wrobe{width:min(80vw,360px);height:clamp(320px,calc(100svh - 290px),520px);margin-top:38px}
@@ -943,9 +955,9 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin
     <div class="note-art reveal">
       <div class="torn"><div class="news" aria-hidden="true">A colour that sets the tone. A silhouette that changes the story. A cultural reference that makes an old idea feel entirely new. My work moves between research and instinct, trend analysis and visual experimentation. I like understanding the why before figuring out the what next. A colour that sets the tone. A silhouette that changes the story. A cultural reference that makes an old idea feel entirely new. My work moves between research and instinct, trend analysis and visual experimentation. I like understanding the why before figuring out the what next. A colour that sets the tone. A silhouette that changes the story. A cultural reference that makes an old idea feel entirely new. My work moves between research and instinct, trend analysis and visual experimentation. I like understanding the why before figuring out the what next. A colour that sets the tone. A silhouette that changes the story. A cultural reference that makes an old idea feel entirely new. My work moves between research and instinct, trend analysis and visual experimentation.</div></div>
       <div class="polaroid tape"><img src="img/note1.webp" alt="Aastha smiling at a café table" loading="lazy" style="object-position:50% 30%"><span class="cap">that's me</span></div>
-      <div class="polaroid p2 clip"><img src="img/note2.webp" alt="Aastha at a concert" loading="lazy" style="object-position:50% 78%"><span class="cap">also me</span></div>
+      <div class="polaroid p2 clip"><img src="img/note3.webp" alt="Aastha in golden-hour light on a rooftop" loading="lazy" style="object-position:50% 22%"><span class="cap">also me</span></div>
       <span class="marker">hello!</span>
-      <svg class="doodle" style="width:54px;height:52px;top:0;right:12%;transform:rotate(12deg)"><use href="#scrib"/></svg>
+      <svg class="doodle" style="width:54px;height:52px;top:0;right:12%;transform:rotate(12deg);color:var(--sage)"><use href="#scrib"/></svg>
       <svg class="doodle" style="width:30px;height:30px;bottom:30%;left:4%;color:var(--bur)"><use href="#spark"/></svg>
     </div>
     <div class="reveal">
@@ -989,7 +1001,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin
       <div class="sheet"><div class="pg front txt"><div class="shade"></div><div class="tt mono"><span>Look 01 / 05</span><span>Poo-core glam</span></div><h3>The Fashion Poo-lice</h3><span class="sub mono">The It-Girl Index</span><p class="lead">Y2K Bollywood girlhood, with unapologetic main-character energy.</p><dl><dt>Outfit</dt><dd>Fitted silhouettes, mini skirts, cropped tops and coordinated separates</dd><dt>Accessories</dt><dd>Tinted sunglasses, statement belts, mini bags, hoops</dd><dt>Make-up</dt><dd>Defined eyes, luminous skin, glossy lips</dd></dl><div class="foot"><span class="cr mono">Model: Aastha · HMU: Saarah Umrethwala</span><button class="nb-open mono" data-p="poo">Open the look →</button></div><span class="pgno">3</span></div><div class="pg back img" data-p="moshpit"><div class="shade"></div><figure class="board"><img src="img/s08.webp" alt="Moshpit Muse styling board" loading="lazy"></figure><div class="snap"><img src="img/p-concert.webp" alt="Moshpit Muse shoot" loading="lazy"><span>front row</span></div><svg class="doodle"><use href="#scrib"/></svg><span class="pgno">4</span></div></div>
       <div class="sheet"><div class="pg front txt"><div class="shade"></div><div class="tt mono"><span>Look 02 / 05</span><span>Grunge pop star</span></div><h3>Moshpit Muse</h3><span class="sub mono">Bad Girl Dress Code</span><p class="lead">Billie Eilish's rebellious streetwear, with skater-girl concert energy.</p><dl><dt>Outfit</dt><dd>Oversized graphic jersey with baggy black shorts</dd><dt>Accessories</dt><dd>Printed bandana, tinted sunglasses, a canvas tote</dd><dt>Make-up</dt><dd>Softly defined eyes, natural skin, muted lip</dd></dl><div class="foot"><span class="cr mono">Model &amp; HMU: Aastha</span><button class="nb-open mono" data-p="moshpit">Open the look →</button></div><span class="pgno">5</span></div><div class="pg back img" data-p="dark"><div class="shade"></div><figure class="board"><img src="img/s11.webp" alt="Daughter of the Dark styling board" loading="lazy"></figure><div class="snap"><img src="img/p-dark.webp" alt="Daughter of the Dark shoot" loading="lazy"><span>spellbound</span></div><svg class="doodle"><use href="#scrib"/></svg><span class="pgno">6</span></div></div>
       <div class="sheet"><div class="pg front txt"><div class="shade"></div><div class="tt mono"><span>Look 03 / 05</span><span>Dark enchantress</span></div><h3>Daughter of the Dark</h3><span class="sub mono">Her Dark Materials</span><p class="lead">Gothic witchcore: dark romance, vintage witchcraft and candlelit ritual.</p><dl><dt>Outfit</dt><dd>Flowing black maxi with sheer sleeves and a structured corset</dd><dt>Accessories</dt><dd>Layered chokers, silver rings, occult jewellery, a candle</dd><dt>Make-up</dt><dd>Smoky eyes, dark lips, sculpted skin</dd></dl><div class="foot"><span class="cr mono">Model: Aastha · HMU: Saarah Umrethwala</span><button class="nb-open mono" data-p="dark">Open the look →</button></div><span class="pgno">7</span></div><div class="pg back img" data-p="feral"><div class="shade"></div><figure class="board"><img src="img/s14.webp" alt="Pretty Feral styling board" loading="lazy"></figure><div class="snap"><img src="img/p-feral.webp" alt="Pretty Feral shoot" loading="lazy"><span>rawr</span></div><svg class="doodle"><use href="#scrib"/></svg><span class="pgno">8</span></div></div>
-      <div class="sheet"><div class="pg front txt"><div class="shade"></div><div class="tt mono"><span>Look 04 / 05</span><span>Feral glam</span></div><h3>Pretty Feral</h3><span class="sub mono">Her Wild Side</span><p class="lead">Y2K partywear meets animal print and street-style attitude.</p><dl><dt>Outfit</dt><dd>Leopard halter crop with a distressed denim mini and faux-fur trim</dd><dt>Accessories</dt><dd>Leopard headscarf, shoulder bag, layered necklaces, furry leg warmers</dd><dt>Make-up</dt><dd>Defined eyes, bronzed skin, glossy lips</dd></dl><div class="foot"><span class="cr mono">Model: Babli Singh · HMU: Aastha</span><button class="nb-open mono" data-p="feral">Open the look →</button></div><span class="pgno">9</span></div><div class="pg back img" data-p="aurat"><div class="shade"></div><figure class="board"><img src="img/s17.webp" alt="The Insane Aurat styling board" loading="lazy"></figure><div class="snap"><img style="object-position:50% 78%" src="img/p-saree.webp" alt="The Insane Aurat shoot" loading="lazy"><span>desi, always</span></div><svg class="doodle"><use href="#scrib"/></svg><span class="pgno">10</span></div></div>
+      <div class="sheet"><div class="pg front txt"><div class="shade"></div><div class="tt mono"><span>Look 04 / 05</span><span>Feral glam</span></div><h3>Pretty Feral</h3><span class="sub mono">Her Wild Side</span><p class="lead">Y2K partywear meets animal print and street-style attitude.</p><dl><dt>Outfit</dt><dd>Leopard halter crop with a distressed denim mini and faux-fur trim</dd><dt>Accessories</dt><dd>Leopard headscarf, shoulder bag, layered necklaces, furry leg warmers</dd><dt>Make-up</dt><dd>Defined eyes, bronzed skin, glossy lips</dd></dl><div class="foot"><span class="cr mono">Model: Babli Singh · HMU: Aastha</span><button class="nb-open mono" data-p="feral">Open the look →</button></div><span class="pgno">9</span></div><div class="pg back img" data-p="aurat"><div class="shade"></div><figure class="board"><img src="img/s17.webp" alt="The Insane Aurat styling board" loading="lazy"></figure><div class="snap"><img style="object-position:50% 50%" src="img/p-saree-look.webp" alt="The Insane Aurat shoot" loading="lazy"><span>desi, always</span></div><svg class="doodle"><use href="#scrib"/></svg><span class="pgno">10</span></div></div>
       <div class="sheet"><div class="pg front txt"><div class="shade"></div><div class="tt mono"><span>Look 05 / 05</span><span>Urban desi fusion</span></div><h3>The Insane Aurat</h3><span class="sub mono">Saree, Not Sorry</span><p class="lead">Classic drape, street edge: everyday Indian street culture in full colour.</p><dl><dt>Outfit</dt><dd>Lime-yellow saree with a structured denim corset</dd><dt>Accessories</dt><dd>Oxidised silver bangles, statement earrings, a nose ring</dd><dt>Make-up</dt><dd>Defined eyes, highlighted skin, nude lip</dd></dl><div class="foot"><span class="cr mono">Model: Sumadhi Rawat · HMU: Aastha</span><button class="nb-open mono" data-p="aurat">Open the look →</button></div><span class="pgno">11</span></div><div class="pg back end"><div class="shade"></div><span class="fin">fin.</span><p>Five looks, one point of view. Thanks for flipping through.</p><span class="mono" style="color:var(--mute)">AA · styling notes · vol. 01</span></div></div>
       <div class="sheet"><div class="pg front inback"><div class="shade"></div><div class="ticket"><b>more looks?</b><span class="mono" style="font-size:9.5px;color:var(--mute)">the rest of the archive lives with me</span><br><a href="mailto:aasthaadhushita@gmail.com">aasthaadhushita@gmail.com</a><small class="mono">hyderabad · open to styling &amp; design</small></div><div class="pocket"><span>KEEP REFERENCES HERE</span></div></div><div class="pg back nbcover nbback"><div class="shade"></div><span class="stitch"></span><span class="strap"></span><span class="mono">Styling notes · vol. 01</span><h3>Aastha</h3><p class="blurb">Concept-led styling: research, references and a lot of "what if we tried this instead?"</p><span class="mono">aasthaadhushita.in</span><span class="bc"><span>AA 2026 · 05</span></span></div></div>
     </div>
@@ -1061,7 +1073,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin
         <div class="fbig" aria-hidden="true">04</div>
         <div class="fwrap"><div class="folder f-loop" role="button" tabindex="0" aria-label="Open Little Loop boards">
           <div class="back"><div class="tab">Little Loop ☺</div></div>
-          <div class="papers"><img class="pp" src="img/ll01.webp" alt="" loading="lazy"><img class="pp" src="img/d31.webp" alt="" loading="lazy"><img class="pp" src="img/d27.webp" alt="" loading="lazy"></div>
+          <div class="papers"><img class="pp" src="img/d31.webp" alt="" loading="lazy"><img class="pp" src="img/d27.webp" alt="" loading="lazy"><img class="pp" src="img/ll01.webp" alt="Little Loop brand board" loading="lazy"></div>
           <div class="cover"><div class="face">
             <div class="llbl"><b><i style="color:#7C8F5E">L</i><i style="color:#C8673E">i</i><i style="color:#E0B23A">t</i><i style="color:#9DB4C8">t</i><i style="color:#7C8F5E">l</i><i style="color:#C8673E">e</i><br><i style="color:#9DB4C8">L</i><i style="color:#E0B23A">o</i><i style="color:#C8673E">o</i><i style="color:#2F4468">p</i></b><span>Kidswear · BESTSELLER</span></div>
             <div class="lpal" aria-hidden="true"><i style="background:#F2EBDD"></i><i style="background:#9AAE84"></i><i style="background:#9DB4C8"></i><i style="background:#C8673E"></i><i style="background:#E0B23A"></i><i style="background:#2F4468"></i></div>
@@ -1193,6 +1205,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin
         <div class="door r"><div class="dface wood"><div class="panel wood"></div><div class="panel lo wood"></div><span class="pull"></span><span class="key"></span></div><div class="dback"></div><span class="hinge h1"></span><span class="hinge h2"></span></div>
       </div><div class="plinth wood"><i></i><i></i></div>
     </div>
+    <aside class="wd-side reveal"><div class="polaroid tape"><img src="img/note2.webp" alt="Aastha at a concert" loading="lazy"><span class="cap">front row, always</span></div><p>If you made it this far, we'd probably get along. <b>Say hi</b>, I don't bite.</p><span class="k mono">currently: styling · researching · at a gig</span></aside>
     <span class="wd-hint mono">scroll ↓ or knock on the doors</span>
   </div></div>
   <footer class="mono"><span>© 2026 Aastha Adhushita</span><span>Hyderabad, India</span><a href="#top">Back to top ↑</a></footer>
