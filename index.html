@@ -27,6 +27,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{background:var(--pink);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
@@ -188,8 +189,9 @@ h2.big em{color:var(--bur)}
 .note-art .p2{width:40%;left:auto;right:0;top:auto;bottom:0;transform:rotate(-6deg);padding-bottom:36px;--strip:36px}
 .note-art .p2 img{aspect-ratio:1}
 .note-art .p2 .cap{font-size:26px}
-.note-art .marker{position:absolute;left:-2%;bottom:13%;z-index:4;padding:10px 18px 8px;background:var(--sage);color:var(--bur);font:400 clamp(24px,2.4vw,34px)/1 var(--marker);transform:rotate(-9deg);box-shadow:0 10px 18px -8px rgba(46,26,14,.55);clip-path:polygon(0 8%,8% 0,22% 5%,38% 0,55% 4%,72% 0,88% 5%,100% 1%,97% 50%,100% 96%,84% 100%,66% 95%,48% 100%,30% 95%,14% 100%,0 96%,3% 50%)}
-.note-art .marker::after{content:"";position:absolute;left:30%;top:-2px;width:46px;height:12px;background:rgba(240,196,204,.85);transform:rotate(4deg)}
+.note-art .marker{position:absolute;left:-2%;bottom:13%;z-index:4;padding:10px 18px 8px;color:var(--bur);font:400 clamp(24px,2.4vw,34px)/1 var(--marker);transform:rotate(-9deg);filter:drop-shadow(0 10px 10px rgba(46,26,14,.45))}
+.note-art .marker::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--sage);clip-path:polygon(0 8%,8% 0,22% 5%,38% 0,55% 4%,72% 0,88% 5%,100% 1%,97% 50%,100% 96%,84% 100%,66% 95%,48% 100%,30% 95%,14% 100%,0 96%,3% 50%)}
+.note-art .marker::after{content:"";position:absolute;left:30%;top:-9px;width:46px;height:14px;z-index:2;background:rgba(240,196,204,.92);transform:rotate(4deg);box-shadow:0 1px 3px rgba(0,0,0,.18)}
 .note p.lead{font-family:var(--serif);font-weight:300;font-size:clamp(34px,4vw,60px);line-height:1.05;color:var(--bur-d);margin-bottom:28px}
 .note p.lead em{color:var(--bur)}
 .note p.body{font-family:var(--serif);font-size:clamp(20px,1.6vw,23px);line-height:1.45;color:var(--mute);max-width:540px;margin-bottom:16px}
@@ -238,8 +240,12 @@ h2.big em{color:var(--bur)}
 .folder .back{position:absolute;inset:0;border-radius:4px 14px 14px 14px;box-shadow:0 46px 80px -34px rgba(46,26,14,.6)}
 .folder .tab{position:absolute;bottom:100%;left:0;height:40px;min-width:44%;padding:0 18px;border-radius:12px 14px 0 0;display:flex;align-items:center;gap:8px;white-space:nowrap}
 .papers{position:absolute;inset:0}
-html.tab .papers{transform:translateZ(60px)}
-html.tab .cover .face{-webkit-backface-visibility:hidden}
+html.tab .folder,html.tab .cover{transform-style:flat;-webkit-transform-style:flat}
+html.tab .back{z-index:0}
+html.tab .papers{z-index:2;transform:none}
+html.tab .cover{z-index:3}
+html.tab .cover.under{z-index:1}
+html.tab .cover .in{display:none}
 .pp{position:absolute;left:5%;width:90%;bottom:5%;aspect-ratio:16/9;object-fit:cover;background:#fff;padding:6px;border-radius:2px;box-shadow:0 14px 30px -12px rgba(0,0,0,.5);will-change:transform}
 .cover{position:absolute;left:0;right:0;bottom:0;height:86%;transform-origin:50% 100%;transform-style:preserve-3d;will-change:transform}
 .cover .face,.cover .in{position:absolute;inset:0;border-radius:10px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:visible}
@@ -727,6 +733,26 @@ html.tab .cover .face{-webkit-backface-visibility:hidden}
   .lug{left:auto;right:4%;top:auto;bottom:3.5%;width:44%}
 }
 @media(prefers-reduced-motion:reduce){.it{transform:rotate(var(--r,0deg))!important}}
+
+/* iPad portrait: roomier wardrobe, readable heading, nothing spilling out of the card or the boxes */
+@media (orientation:portrait){
+  html.tab .wd-stage{grid-template-columns:1fr;grid-template-rows:auto 1fr;justify-items:center;text-align:center;gap:20px;padding:112px 28px 44px}
+  html.tab .wd-side{display:none}
+  html.tab .wd-txt{max-width:560px}
+  html.tab .wd-txt .eyebrow{justify-content:center;margin-bottom:16px}
+  html.tab .wd-txt h2{font-size:clamp(34px,5.4vw,46px);line-height:1.12}
+  html.tab .wd-txt p{display:block;margin:12px auto 0;font-size:16px;max-width:420px}
+  html.tab .wrobe{width:min(56vw,480px);height:clamp(440px,calc(100svh - 340px),800px);margin-top:44px}
+  html.tab .ccard{width:86%;padding:20px 18px 22px}
+  html.tab .ccard .s{font-size:48px}
+  html.tab .ccard .mail{font-size:clamp(14px,2.4vw,20px);max-width:100%;overflow-wrap:anywhere}
+  html.tab .ccard .k,html.tab .ccard .loc{font-size:9px}
+  html.tab .ccard .btns{gap:8px;flex-wrap:wrap}
+  html.tab .ccard .btn{padding:9px 14px;font-size:9.5px}
+  html.tab .shelf{height:21%;gap:3%;padding:0 4% 3px}
+  html.tab .hbox{width:29%}
+  html.tab .hbox .lbl{font-size:9px;line-height:1.1;white-space:normal;max-width:88%;text-align:center;padding:3px 4px}
+}
 
 /* shared contact links */
 .mail{display:inline-block;margin-top:40px;font:300 clamp(24px,3.6vw,50px) var(--serif);border-bottom:1px solid var(--blush);transition:.3s}
@@ -1384,7 +1410,7 @@ const still=matchMedia('(prefers-reduced-motion: reduce)').matches;if(still)fw.c
 function set(i,t){const e=el[i],enter=i===0||still?1:ez(cl((t+.22)/.22)),exit=i===N-1||still?0:ez(cl((t-.78)/.22));
   const open=ez(cl(t/.3)),pap=ez(cl((t-.12)/.34)),txt=ez(cl((t-.3)/.22));
   e.f.style.transform=`translate3d(0,${(1-enter)*85-exit*75}vh,0) rotate(${tilt[i]*(1-exit)+(1-enter)*6}deg) scale(${1-exit*.12})`;
-  if(open>.12&&!(e.op>.12))SFX.play('flap');e.op=open;e.cv.style.transform=`rotateX(${-open*116}deg)`;const tb=isTab();e.cv.style.opacity=innerWidth<860||tb?1-cl((open-.4)/.4):1;e.cv.style.visibility=tb&&open>.8?'hidden':'';
+  if(open>.12&&!(e.op>.12))SFX.play('flap');e.op=open;e.cv.style.transform=`rotateX(${-open*116}deg)`;const tb=isTab();e.cv.style.opacity=innerWidth<860||tb?1-cl((open-.4)/.4):1;e.cv.style.visibility=tb&&open>.8?'hidden':'';if(tb)e.cv.classList.toggle('under',open>.2);
   e.pp.forEach((p,k)=>p.style.transform=`translate3d(${dx[k]*pap}%,${off[k]*pap}%,0) rotate(${rot[k]*pap}deg)`);
   e.x.style.opacity=txt*(1-exit);e.x.style.transform=`translate3d(0,${(1-txt)*40-exit*50}px,0)`;e.big.style.opacity=txt*(1-exit)}
 function render(p){sc.forEach((s,i)=>{const t=p-i,vis=t>-.22&&t<1;s._t=t;s.classList.toggle('vis',vis);s.classList.toggle('act',t>-.05&&t<.85);if(vis)set(i,t);
