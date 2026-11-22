@@ -51,6 +51,8 @@ nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:80;displ
 nav a{padding:8px 15px;border-radius:99px;font:400 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--bur-d);white-space:nowrap;transition:.25s}
 nav a.aa{display:grid;place-items:center;width:34px;height:34px;padding:0;margin-right:4px;border-radius:50%;background:var(--bur);color:var(--pink);font:italic 500 15px/1 var(--serif);letter-spacing:.02em;text-transform:none}
 nav a.aa:hover{background:var(--espresso);color:var(--pink)}
+.navburger{display:none}
+#navpanel{display:none}
 .sndtog{display:grid;place-items:center;width:34px;height:34px;margin-left:4px;border-radius:50%;color:var(--bur-d);transition:.25s;flex:none}
 .sndtog svg{width:18px;height:18px}
 .sndtog .wv{display:none}.sndtog.on .wv{display:block}.sndtog.on .mx{display:none}
@@ -59,7 +61,26 @@ nav a.aa:hover{background:var(--espresso);color:var(--pink)}
 .sndtog.on .wv path{animation:wv 1.6s ease-in-out infinite}.sndtog.on .wv path+path{animation-delay:.2s}
 @keyframes wv{50%{opacity:.35}}
 nav a:hover,nav a.act{background:var(--bur);color:var(--pink)}
-@media(max-width:700px){nav{max-width:calc(100vw - 20px)}nav a{padding:7px 8px;font-size:9.5px;letter-spacing:.06em}nav a.hide{display:none}}
+@media(max-width:700px){
+  nav{width:calc(100vw - 24px);max-width:420px;justify-content:space-between;align-items:center;gap:0;padding:5px;transition:width .35s cubic-bezier(.3,1.2,.4,1),border-radius .3s}
+  nav a{display:flex;align-items:center;justify-content:center;height:34px;padding:0 7px;font-size:9.5px;letter-spacing:.06em;line-height:1}
+  nav a.aa{margin:0;width:34px;padding:0;flex:none}
+  nav a.hide{display:none}
+  .sndtog{margin:0}
+  .navburger{display:none;place-items:center;width:34px;height:34px;border-radius:50%;color:var(--bur-d);flex:none}
+  .navburger svg{width:20px;height:20px}
+  .navburger[aria-expanded="true"]{background:var(--bur);color:var(--pink)}
+  nav.min{width:auto;gap:2px;left:auto;right:12px;transform:none}
+  nav.min a:not(.aa){display:none}
+  nav.min .navburger{display:grid}
+  #navpanel{display:block;position:fixed;top:70px;right:12px;z-index:79;width:min(300px,calc(100vw - 24px));padding:10px;border-radius:20px;background:rgba(250,238,240,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(70,19,18,.18);box-shadow:0 24px 40px -18px rgba(46,26,14,.6);opacity:0;pointer-events:none;transform:translate(0,-10px) scale(.96);transform-origin:100% 0;transition:.3s cubic-bezier(.3,1.3,.5,1)}
+  #navpanel.on{opacity:1;pointer-events:auto;transform:none}
+  #navpanel a{display:flex;align-items:center;justify-content:space-between;padding:13px 14px;border-radius:12px;font:400 12px var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--bur-d)}
+  #navpanel a::after{content:"→";color:var(--bur);opacity:.5}
+  #navpanel a.act,#navpanel a:active{background:var(--bur);color:var(--pink)}
+  #navpanel a.act::after{color:var(--pink);opacity:1}
+}
 
 /* hero: leopard notebook cover */
 .hero{position:relative;margin:0;min-height:100vh;min-height:100svh;border-radius:0;overflow:hidden;background:#461312 url(img/leopard.webp) center/cover;color:var(--pink);
@@ -90,12 +111,12 @@ nav a:hover,nav a.act{background:var(--bur);color:var(--pink)}
 .disc svg{display:block;width:100%;height:100%;animation:spin 22s linear infinite}
 .disc::after{content:"";position:absolute;inset:0;border-radius:50%;pointer-events:none;background:conic-gradient(from 25deg,transparent 0 10%,rgba(255,255,255,.17) 15%,transparent 21% 56%,rgba(255,255,255,.12) 62%,transparent 68%)}
 .disc .vlab{transition:opacity .5s}
-.vinyl:hover .sleeve,.vinyl.playing .sleeve,.vinyl:focus-within .sleeve{opacity:1;transform:translateX(-58%) rotate(-5deg)}
-.vinyl:hover .disc,.vinyl.playing .disc,.vinyl:focus-within .disc{transform:translateX(14%)}
-.vinyl:hover .vlab,.vinyl.playing .vlab,.vinyl:focus-within .vlab{opacity:0}
+.vinyl.peek .sleeve,.vinyl:hover .sleeve,.vinyl.playing .sleeve,.vinyl:focus-within .sleeve{opacity:1;transform:translateX(-58%) rotate(-5deg)}
+.vinyl.peek .disc,.vinyl:hover .disc,.vinyl.playing .disc,.vinyl:focus-within .disc{transform:translateX(14%)}
+.vinyl.peek .vlab,.vinyl:hover .vlab,.vinyl.playing .vlab,.vinyl:focus-within .vlab{opacity:0}
 .np{position:absolute;top:calc(100% + 14px);right:0;width:240px;background:var(--pink2);color:var(--bur);padding:10px 12px;border-radius:4px;text-align:left;
   box-shadow:0 14px 26px -14px rgba(46,26,14,.8);opacity:0;transform:translateY(-6px);transition:.4s;pointer-events:none}
-.vinyl:hover .np,.vinyl.playing .np,.vinyl:focus-within .np{opacity:1;transform:none;pointer-events:auto}
+.vinyl.peek .np,.vinyl:hover .np,.vinyl.playing .np,.vinyl:focus-within .np{opacity:1;transform:none;pointer-events:auto}
 .np small{display:block;font-size:9px;color:var(--mute)}
 .np b{display:block;font:400 22px/1.05 var(--serif);font-style:italic;margin-top:2px}
 .np span{display:block;font-size:12px;color:var(--espresso)}
@@ -683,7 +704,7 @@ h2.big em{color:var(--bur)}
 @keyframes pinpop{40%{translate:0 -16px;scale:1.25}}
 /* phones: portrait canvas, same items rearranged */
 @media(max-width:700px){
-  .desk{width:400px;height:720px}
+  .desk{width:400px;height:860px}
   .desk::after{display:none}
   .sk{left:3%;top:3%;width:94%;--r:-1.5deg}
   .sk .pg2{padding:12px}.sk .bio{font-size:10.5px;line-height:1.35;margin-top:4px}.sk h4{font-size:28px;margin:2px 0 6px}.sk ul{font-size:10.5px}.sk li{margin-bottom:5px;padding-left:16px}
@@ -699,7 +720,13 @@ h2.big em{color:var(--bur)}
   .tix{left:3%;top:68%;width:56%}.tk b{font-size:13px}.tk span,.tk .stub span{font-size:6.5px}.tk .main{padding:7px 9px}.tk .stub b{font-size:12px}
   .lug{left:5%;bottom:2%;width:34%;height:78px}.lug .face{padding:12px 10px 10px 26px}.lug b{font-size:15px}.lug .bk{padding-top:8px;padding-bottom:8px}.lug .bk b{font-size:10.5px;margin:2px 0 3px}.lug .mono{font-size:6.5px}.lug .face::before{left:9px;width:9px;height:9px}
   .pol{padding:5px 5px 20px}.pol span{font-size:14px;bottom:2px}
-  .pol1{left:41%;bottom:1.5%;width:23%}.pol2,.cup,.dpin{display:none}
+  .pol1,.pol2,.cup,.dpin,.pencil,.fan .fnote{display:none}
+  .sk{top:2.5%}
+  .fan{left:4%;top:34%;width:40%}
+  .lap{right:3%;top:35%;width:50%}
+  .idp{right:auto;left:7%;top:64%;width:36%}
+  .tix{left:50%;top:62.5%;width:44%}.tk:nth-child(2){transform:rotate(3deg)}
+  .lug{left:auto;right:4%;top:auto;bottom:3.5%;width:44%}
 }
 @media(prefers-reduced-motion:reduce){.it{transform:rotate(var(--r,0deg))!important}}
 
@@ -917,7 +944,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin
 <div id="cur">view</div>
 
 <nav>
-  <a href="#top" class="aa" aria-label="Back to top">AA</a><a href="#styling">Styling</a><a href="#work">Collections</a><a href="#lab">Trend Lab</a><a href="#experience" class="hide">Experience</a><a href="#about" class="hide">About</a><a href="#contact">Contact</a><button class="sndtog" id="sndtog" aria-pressed="false" aria-label="Sound is off. Turn sound on" title="Sound off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><g class="wv" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></g><g class="mx" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></g></svg></button>
+  <a href="#top" class="aa" aria-label="Back to top">AA</a><a href="#styling">Styling</a><a href="#work">Collections</a><a href="#lab">Trend Lab</a><a href="#experience" class="hide">Experience</a><a href="#about" class="hide">About</a><a href="#contact">Contact</a><button class="navburger" id="navburger" aria-label="Open menu" aria-expanded="false" aria-controls="navpanel"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button><button class="sndtog" id="sndtog" aria-pressed="false" aria-label="Sound is off. Turn sound on" title="Sound off"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><g class="wv" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></g><g class="mx" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M16.5 9.5l5 5M21.5 9.5l-5 5"/></g></svg></button>
 </nav>
 
 <header class="hero" id="top">
@@ -1159,7 +1186,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin
     </div><span class="tap">tap me ↑</span></div>
     <div class="it idp" data-d="0.12"><span class="lan"></span>
       <div data-act="flip" tabindex="0" role="button" aria-label="Student ID: flip it over"><div class="fl">
-        <div class="card face sh"><span class="slot"></span><span class="u mono">Chandigarh University</span><img src="img/p-pink.webp" alt="" loading="lazy">
+        <div class="card face sh"><span class="slot"></span><span class="u mono">Chandigarh University</span><img src="img/id-photo.webp" alt="" loading="lazy">
           <b>Aastha Adhushita</b><span class="d mono">B.Sc. Fashion &amp; Design<br>2022 – 2025 · CGPA 7.5</span><div class="bc"></div></div>
         <div class="card face bk sh"><span class="slot"></span><span class="ret">If found, please return to</span><a href="mailto:aasthaadhushita@gmail.com">aasthaadhushita@gmail.com</a><span class="ret">Hyderabad, Telangana</span><span class="s">Aastha</span></div>
       </div></div></div>
@@ -1296,6 +1323,18 @@ const SFX=(()=>{let ctx=null,out=null,on=false;const last={};
 // hero sparkles chime when the cursor passes close by
 (()=>{const hero=$('.hero'),sp=$$('.hero .spk');hero.addEventListener('pointermove',e=>{if(!SFX.on)return;sp.forEach(s=>{const r=s.getBoundingClientRect(),dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
   if(dx*dx+dy*dy<45*45){if(!s._near){s._near=1;SFX.play('chime')}}else s._near=0})})})();
+// phones: after the hero the nav bar collapses into a hamburger with a dropdown of the same links
+(()=>{const nav=document.querySelector('nav'),bt=$('#navburger'),hero=$('.hero'),mq=matchMedia('(max-width:700px)');if(!nav||!bt)return;
+  const panel=document.createElement('div');panel.id='navpanel';panel.setAttribute('role','menu');
+  nav.querySelectorAll('a').forEach(a=>{if(a.classList.contains('aa'))return;const c=a.cloneNode(true);c.classList.remove('hide');c.removeAttribute('class');c.dataset.t=a.getAttribute('href');panel.appendChild(c)});
+  document.body.appendChild(panel);
+  const close=()=>{panel.classList.remove('on');bt.setAttribute('aria-expanded','false')};
+  const upd=()=>{const past=mq.matches&&hero.getBoundingClientRect().bottom<70;nav.classList.toggle('min',past);if(!past)close();
+    panel.querySelectorAll('a').forEach(a=>a.classList.toggle('act',nav.querySelector(`a[href="${a.dataset.t}"].act`)!==null))};
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+  bt.addEventListener('click',()=>{const o=!panel.classList.contains('on');panel.classList.toggle('on',o);bt.setAttribute('aria-expanded',o);bt.setAttribute('aria-label',o?'Close menu':'Open menu')});
+  panel.addEventListener('click',e=>{if(e.target.closest('a'))close()});addEventListener('pointerdown',e=>{if(!panel.contains(e.target)&&!bt.contains(e.target))close()});
+  addEventListener('keydown',e=>{if(e.key==='Escape')close()})})();
 // progress, parallax, nav state
 const bar=$('#bar');
 addEventListener('scroll',()=>{bar.style.width=(scrollY/(document.body.scrollHeight-innerHeight)*100)+'%';
@@ -1510,7 +1549,10 @@ addEventListener('keydown',e=>{if(e.key==='Escape'&&skm.classList.contains('on')
     else {yt.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/n2BnbpjpRdo?start=66&autoplay=1&rel=0&playsinline=1" title="Olivia Rodrigo – all-american bitch (official lyric video)" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'}};
   const stop=()=>{if(v.classList.contains('playing'))SFX.play('needleLift');SFX.hiss(false);v.classList.remove('playing');rate(1);st.textContent='tap the record to hear why ▶';
     if(au){if(!au.paused)fadeTo(0,500,()=>au.pause());bar.style.width='0'}else yt.innerHTML=''};
-  v.querySelector('.disc').addEventListener('click',()=>v.classList.contains('playing')?stop():play())})();
+  const touch=matchMedia('(hover:none)');
+  addEventListener('pointerdown',e=>{if(touch.matches&&!v.contains(e.target))v.classList.remove('peek')});
+  v.querySelector('.disc').addEventListener('click',e=>{if(touch.matches&&!v.classList.contains('peek')&&!v.classList.contains('playing')){v.classList.add('peek');v.querySelector('.disc').blur();return}
+    v.classList.contains('playing')?stop():play()})})();
 addEventListener('keydown',e=>{if(!lb.classList.contains('on'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')show(idx+1);if(e.key==='ArrowLeft')show(idx-1)});
 </script>
 </body>
