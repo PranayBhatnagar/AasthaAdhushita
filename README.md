@@ -72,7 +72,7 @@ The site is fully static. To publish it with GitHub Pages, go to **Settings → 
 ```
 .
 ├── index.html          # the whole site (markup, styles, script)
-├── Aastha_Resume.pdf   # résumé linked from the Contact section
+├── Aastha_Adhushita_Fashion_Stylist_Resume.pdf   # résumé linked from the Contact section
 ├── img/
 │   ├── d01–d37.webp    # portfolio pages (Blue Alchemy, Iridescent Arbor, Path of Revati, Merry Maya)
 │   ├── s*.webp         # styling portfolio pages
